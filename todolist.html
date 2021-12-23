@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
+    }
+
+    header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        /* background-color: green; */
+    }
+
+    nav {
+        width: 80vw;
+
+    }
+
+    .todoheader {
+        font-size: 15px;
+        text-align: center;
+        align-items: center;
+        justify-content: center;
+        color: white;
+    }
+
+    .input_section {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        border: 1px solid black;
+        padding: 10px;
+
+    }
+
+    .input_box {
+
+        width: 50vw;
+        border: 1px solid black;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-size: 25px;
+
+    }
+
+    form input {
+        width: 30vw;
+        font-size: 20px;
+
+    }
+
+    .input_btn {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 20px;
+        padding: 20px;
+    }
+
+    .input_btn button {
+        width: 10vw;
+        padding: 10px;
+        font-size: 20px;
+        background-color: black;
+        color: white;
+        border-radius: 5px;
+    }
+
+    .task_container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    #show {
+        width: 60vw;
+        /* border: 1px solid black; */
+        /* display: flex; */
+        gap: 20px;
+    }
+
+    .parent {
+        width: 60vw;
+        display: flex;
+        flex-direction: row;
+        border: 1px solid black;
+        padding: 20px;
+    }
+
+    .text_sec {
+        font-size: 20px;
+    }
+
+    .text_sec p {
+        gap: 20px;
+    }
+
+    .btn_sec {
+        font-size: 20px;
+        gap: 60px;
+    }
+
+    .btn_sec button {
+        gap: 20px;
+        font-size: 20px;
+    }
+
+    .Donetask {
+        color: red;
+    }
+</style>
+
+<body>
+    <header>
+        <nav>
+            <div class="todoheader">
+                <h1>Todo List </h1>
+                <h3>Add here all your daily routine </h3>
+            </div>
+        </nav>
+    </header>
+    <div class="input_section">
+        <div class="input_box">
+            <form action="">
+                Task Name : <input type="text" id="task">
+                Task Date : <input type="date" id="date">
+                Task Time : <input type="time" id="time">
+            </form>
+            <div class="input_btn">
+                <button onclick="submit()">Add Task</button>
+                <!-- <button onclick="ShowTask()">Show Task</button> -->
+            </div>
+
+        </div>
+    </div>
+    <div class="task_container">
+        <div id="show"></div>
+    </div>
+</body>
+
+</html>
+<script>
+    let tasklist = JSON.parse(localStorage.getItem("tasklist")) || []
+    let SIno = 0
+    function submit() {
+        tasklist.map((el) => {
+            if (el.si == SIno) {
+                SIno = el.si + 1
+            }
+        })
+        let task = document.getElementById("task").value
+        let date = document.getElementById("date").value
+        let time = document.getElementById("time").value
+        let Id = Math.floor(Math.random() * 900)
+        let taskobj = {
+            si: SIno,
+            taskname: task,
+            taskdate: date,
+            tasktime: time,
+            id: Id,
+        }
+        tasklist.push(taskobj)
+        localStorage.setItem("tasklist", JSON.stringify(tasklist))
+
+        ShowTask()
+    }
+    let show = document.getElementById("show")
+    function ShowTask() {
+        show.innerHTML = ""
+        tasklist.map((el, i) => {
+            let parent = document.createElement("div")
+            parent.setAttribute("class", "parent")
+            let text_sec = document.createElement("div")
+            text_sec.setAttribute("class", "text_sec")
+            let btn_sec = document.createElement("div")
+            btn_sec.setAttribute("class", "btn_sec")
+            let btnremove = document.createElement("button")
+            let btndone = document.createElement("button")
+            btnremove.innerHTML = "Remove"
+            btndone.innerHTML = "Done"
+            btndone.addEventListener("click", function () {
+                Done(i)
+            })
+            btnremove.onclick = function () {
+                Remove(i)
+            }
+            let name = document.createElement("p")
+            name = `  Task Name : ${el.taskname}  `
+            let date = document.createElement("p")
+            date = `  Task Date : ${el.taskdate}`
+            let time = document.createElement("p")
+            time = `  Task Time : ${el.tasktime}  `
+            let Si = document.createElement("p")
+            Si = `Si No : ${el.si}  `
+            text_sec.append(Si, name, date, time)
+            btn_sec.append(btndone, btnremove)
+            parent.append(text_sec, btn_sec)
+            show.append(parent)
+
+        })
+    }
+    ShowTask()
+    function Done(i) {
+        ShowTask()
+    }
+    function Remove(i) {
+        tasklist.splice(i, 1)
+        localStorage.setItem("tasklist", JSON.stringify(tasklist))
+        ShowTask()
+    }
+
+</script>
