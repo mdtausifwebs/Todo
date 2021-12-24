@@ -1,0 +1,36 @@
+@media screen and (min-width:200px) and (max-width:500px) {
+
+    form input {
+        width: 60vw;
+    }
+
+    .input_btn button {
+        width: 100vw;
+    }
+
+    #show {
+        width: 80vw;
+    }
+
+    .parent {
+        width: 75vw;
+        flex-direction: column;
+    }
+
+    .text_sec {
+        width: 75vw;
+        /* display: flex; */
+        flex-wrap: wrap;
+    }
+
+    .text_sec p {
+        font-size: 18px;
+    }
+    .btn_sec{
+        width: 75vw;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+}

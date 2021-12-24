@@ -5,132 +5,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="stylesheet" href="todo.css">
+    <link rel="stylesheet" href="media_todo.css">
+    <title>Todo List </title>
 </head>
-<style>
-    body {
-        background-image: linear-gradient(to right, red, orange, yellow, green, blue, indigo, violet);
-    }
-
-    header {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        /* background-color: green; */
-    }
-
-    nav {
-        width: 80vw;
-
-    }
-
-    .todoheader {
-        font-size: 15px;
-        text-align: center;
-        align-items: center;
-        justify-content: center;
-        color: white;
-    }
-
-    .input_section {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        border: 1px solid black;
-        padding: 10px;
-
-    }
-
-    .input_box {
-
-        width: 50vw;
-        /* border: 1px solid black; */
-    }
-
-    form {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        font-size: 25px;
-
-    }
-
-    form input {
-        width: 30vw;
-        font-size: 20px;
-        /* background-color: rgb(199, 186, 186); */
-        color: black;
-
-    }
-
-    .input_btn {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        gap: 20px;
-        padding: 20px;
-    }
-
-    .input_btn button {
-        width: 10vw;
-        padding: 10px;
-        font-size: 20px;
-        background-color: black;
-        color: white;
-        border-radius: 5px;
-    }
-
-    @media screen and (min-width:200px) and (max-width:500px) {
-        .input_btn button {
-            width: 100vw;
-
-        }
-    }
-
-    .task_container {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-    }
-
-    #show {
-        width: 60vw;
-        /* border: 1px solid black; */
-        /* display: flex; */
-        gap: 20px;
-    }
-
-    .parent {
-        width: 60vw;
-        display: flex;
-        flex-direction: row;
-        border: 1px solid black;
-        padding: 20px;
-    }
-
-    .text_sec {
-        font-size: 20px;
-    }
-
-    .text_sec p {
-        gap: 20px;
-    }
-
-    .btn_sec {
-        font-size: 20px;
-        gap: 60px;
-    }
-
-    .btn_sec button {
-        gap: 20px;
-        font-size: 20px;
-    }
-
-    .Donetask {
-        color: red;
-    }
-</style>
 
 <body>
     <header>
@@ -207,13 +85,13 @@
                 Remove(i)
             }
             let name = document.createElement("p")
-            name = `  Task Name : ${el.taskname}  `
+            name.innerHTML = `  Task Name : ${el.taskname}  `
             let date = document.createElement("p")
-            date = `  Task Date : ${el.taskdate}`
+            date.innerHTML = `  Task Date : ${el.taskdate}`
             let time = document.createElement("p")
-            time = `  Task Time : ${el.tasktime}  `
+            time.innerHTML = `  Task Time : ${el.tasktime}  `
             let Si = document.createElement("p")
-            Si = `Si No : ${el.si}  `
+            Si.innerHTML = `Si No : ${el.si}  `
             text_sec.append(Si, name, date, time)
             btn_sec.append(btndone, btnremove)
             parent.append(text_sec, btn_sec)
